@@ -8,10 +8,10 @@ class TeamOption extends Component {
     teams: []
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     this.getTeams()
   }
-
+  
   getTeams = () => {
     axios.get('http://localhost:8000/team_projects/api/teams/')
       .then(res => {

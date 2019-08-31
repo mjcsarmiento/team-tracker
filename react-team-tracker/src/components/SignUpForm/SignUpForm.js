@@ -19,7 +19,7 @@ class SignUpForm extends Component {
     'image_url': '',
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     this.getCurrentUser()
   }
 

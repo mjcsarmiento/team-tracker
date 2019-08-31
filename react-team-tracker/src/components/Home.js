@@ -14,7 +14,7 @@ class Home extends Component {
     entries: []
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     this.getCurrentUser()
   }
 

@@ -13,7 +13,7 @@ class LogInForm extends Component {
     password: '',
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     this.getCurrentUser()
   }
 

@@ -8,7 +8,7 @@ class ProjectOption extends Component {
     projects: []
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     this.getTeamProjects()
   }
 
