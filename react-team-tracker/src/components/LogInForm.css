@@ -1,0 +1,33 @@
+.login-container {
+  margin-top: 50px;
+}
+
+.login-form {
+  width: 300px;
+  margin-top: 30px !important;
+}
+
+.login-form .btn-submit {
+  margin-top: 15px;
+  background: #950740;
+  color: #ffffff;
+  border: 1px solid #950740;
+}
+
+.login-form .btn-submit:hover {
+  background: #ffffff;
+  color: #950740;
+  border: 1px solid #950740;
+}
+
+.login-container .registration-link {
+  margin-top: 15px;
+}
+
+.login-container .registration-link a {
+  color: #950740;
+}
+
+.login-container .registration-link a:hover {
+  color: #000000;
+}
