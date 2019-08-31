@@ -1,13 +1,15 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import NavBar from './Header/NavBar';
+import Title from 'antd/lib/typography/Title';
+import './Header.css';
 
 const Header = () => {
   return (
-    <Fragment>
-      <h1>Team Tracker</h1>
-      <sub>Keep track of your team's progress</sub>
+    <div className="navigation">
+      <Title className="header"><div className="team-header">Team</div> Tracker</Title>
+      <p className="phrase">keep track of your team's progress</p>
       <NavBar/>
-    </Fragment>
+    </div>
   );
 }
  

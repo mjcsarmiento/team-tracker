@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
 import NavBarLink from './NavBarLink';
+import { withRouter } from 'react-router-dom';
 
-const NavBar = () => {
-  return (
-    <div>
-      <NavBarLink path="/" label="Home"/>
-      <NavBarLink path="/team" label="Team Members"/>
-    </div>
-  );
+class NavBar extends Component {
+  logOutUser = () => {
+    localStorage.removeItem('token')
+    this.props.history.push('/login')
+  }
+
+  render() { 
+    return (
+      <div>
+        <NavBarLink path="/" label="Home"/>
+        <NavBarLink path="/team" label="Team Members"/>
+        <button onClick={this.logOutUser}>Logout</button>
+      </div>
+    );
+  }
 }
  
-export default NavBar;
+export default withRouter(NavBar);
