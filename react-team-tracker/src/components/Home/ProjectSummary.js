@@ -10,6 +10,7 @@ class ProjectSummary extends Component {
     this.getProjectSummary()
   }
 
+  // updates projects in state by GET request based on passed teamId
   getProjectSummary = () => {
     axios.get('http://localhost:8000/team_projects/api/projects/?team=' + this.props.teamId)
       .then(res => {
@@ -21,6 +22,8 @@ class ProjectSummary extends Component {
 
   render() { 
     const { projects } = this.state
+
+    // returns Option for every value inside projects
     const projectList = projects.length ? (
       projects.map(project => {
         return (
@@ -31,6 +34,8 @@ class ProjectSummary extends Component {
         )
       })
     ) : (null)
+
+    // returns a table with Project and Total Hours as headers with projectList
     return (
       <table>
         <thead>

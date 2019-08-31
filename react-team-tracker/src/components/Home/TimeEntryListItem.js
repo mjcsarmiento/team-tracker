@@ -13,6 +13,7 @@ class TimeEntryListItem extends Component {
     this.getProject(this.props.entry.project)
   }
 
+  // updates user in state by GET request based on passed userId
   getUser = (userId) => {
     axios.get('http://localhost:8000/users/api/users/' + userId)
       .then(res => {
@@ -22,6 +23,7 @@ class TimeEntryListItem extends Component {
       })
   }
 
+  // updates project in state by GET request based on passed projectId
   getProject = (projectId) => {
     axios.get('http://localhost:8000/team_projects/api/projects/' + projectId)
       .then(res => {
@@ -54,6 +56,7 @@ class TimeEntryListItem extends Component {
     );
   }
 
+  // will only return renderComponent() if user and project in state are not empty
   render() {
     return this.state.user && this.state.project ? (this.renderComponent()) : (null)
   }

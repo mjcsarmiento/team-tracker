@@ -23,7 +23,11 @@ class SignUpForm extends Component {
     this.getCurrentUser()
   }
 
+  // updates user in state by GET request
   getCurrentUser = () => {
+    // token is retrieved from localStorage and used to get currently logged in user
+    // updates user in state based on the currently logged in user
+    // once a user is logged in, it will redirect to Home
     const token = localStorage.getItem('token')
     if (token) {
       const headers = {'Authorization': 'Bearer ' + token}
@@ -38,6 +42,7 @@ class SignUpForm extends Component {
     }
   }
 
+  // sets first_name, last_name, username, password, team and image_url to null
   setToNull = () => {
     this.setState({
       'first_name': '',
@@ -49,12 +54,17 @@ class SignUpForm extends Component {
     })
   }
 
+  // updates state by getting name and assigning new value to name
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
     })
   }
 
+  // creates a CustomUser via POST request
+  // redirects to Log In once CustomUser is created
+  // returns an error if username already exists
+  // sets values in state to null after
   registerUser = (hasImage) => {
     const data = {
       'first_name': this.state.first_name,
@@ -80,6 +90,9 @@ class SignUpForm extends Component {
       })
   }
 
+  // if image_url is not empty, it checks first if image_url is a valid image URL
+  // it will show an alert if image_url is invalid
+  // if image_url empty, it will allow to create a new CustomUser
   handleSubmit = (e) => {
     e.preventDefault()
     if (this.state.image_url) {
@@ -153,7 +166,10 @@ class SignUpForm extends Component {
                 onChange={this.handleChange}
               />
             </Form.Item>
-            { first_name && last_name && username && password && team ? (
+            {
+              // if first_name, last_name, username, password and team are not filled up, Submit button will be disabled
+              // Submit button will only be activated once first_name, last_name, username, password and team are filled up
+              first_name && last_name && username && password && team ? (
               <Button htmlType="submit" className="btn-submit">Submit</Button>
             ) : (
               <Button htmlType="submit" className="btn-submit" disabled>Submit</Button>

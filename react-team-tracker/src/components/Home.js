@@ -18,24 +18,30 @@ class Home extends Component {
     this.getCurrentUser()
   }
 
+  // updates user in state by GET request
   getCurrentUser = () => {
+    // token is retrieved from localStorage and used to get currently logged in user
+    // updates user in state based on the currently logged in user
+    // updates entries using getTimeEntryList
     const token = localStorage.getItem('token')
     if (token) {
       const headers = {'Authorization': 'Bearer ' + token}
       axios.get('http://localhost:8000/users/current/', {'headers': headers})
-        .then(res => {
-          this.setState({
-            user: res.data
-          }, () => {
-            this.getTimeEntryList(this.state.user.team)
-          })
+      .then(res => {
+        this.setState({
+          user: res.data
+        }, () => {
+          this.getTimeEntryList(this.state.user.team)
         })
+      })
     }
+    // redirects to Log In page if there is no token in localStorage
     else {
       this.props.history.push('/login')
     }
   }
 
+  // updates entries in state by GET request based on passed teamId
   getTimeEntryList = (teamId) => {
     axios.get('http://localhost:8000/team_projects/api/teams/' + teamId)
       .then(res => {
@@ -45,6 +51,7 @@ class Home extends Component {
       })
   }
 
+  // updates entries in state by adding the passed newEntry to entries
   updateTimeEntryList = (newEntry) => {
     this.setState({
       entries: [newEntry, ...this.state.entries]
@@ -70,6 +77,7 @@ class Home extends Component {
     )
   }
 
+  // will only return renderHomeComponents() if user and project in state are not empty
   render() {
     return (
       <Fragment>

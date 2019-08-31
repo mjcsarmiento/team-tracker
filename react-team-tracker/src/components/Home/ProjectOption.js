@@ -12,6 +12,7 @@ class ProjectOption extends Component {
     this.getTeamProjects()
   }
 
+  // updates projects in state by GET request based on passed teamId
   getTeamProjects = () => {
     axios.get('http://localhost:8000/team_projects/api/teams/' + this.props.teamId)
       .then(res => {
@@ -21,6 +22,7 @@ class ProjectOption extends Component {
       })
   }
 
+  // specified target with name and value to match handleChange from TimeEntryForm
   handleChange = (value) => {
     if (value !== '')  {
       this.props.onChange({
@@ -34,6 +36,7 @@ class ProjectOption extends Component {
 
   render() {
     const { projects } = this.state
+    // returns Option for every value inside projects
     const projectList = projects.length ? (
       projects.map(project => {
         return (
@@ -43,6 +46,8 @@ class ProjectOption extends Component {
         )
       })
     ) : (null)
+
+    // returns a Select with Option values from projectList
     return (
       <Select name="project" onChange={this.handleChange} value={this.props.value} defaultValue={this.props.value} style={{ width: '70%' }}>
         <Option value="">-- Select Project --</Option>

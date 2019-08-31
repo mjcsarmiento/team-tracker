@@ -13,6 +13,7 @@ class TeamMemberList extends Component {
     this.getCurrentUser()
   }
 
+  // updates members in state by GET request based on passed teamId
   getTeamMembers = (teamId) => {
     axios.get('http://localhost:8000/users/api/users/?team=' + teamId)
       .then(res => {
@@ -22,7 +23,11 @@ class TeamMemberList extends Component {
       })
   }
 
+  // updates user in state by GET request
   getCurrentUser = () => {
+    // token is retrieved from localStorage and used to get currently logged in user
+    // updates user in state based on the currently logged in user
+    // once a user is logged in, it will redirect to Home
     const token = localStorage.getItem('token')
     if (token) {
       const headers = {'Authorization': 'Bearer ' + token}
@@ -35,6 +40,7 @@ class TeamMemberList extends Component {
           })
         })
     }
+    // redirects to Log In page if there is no token in localStorage
     else {
       this.props.history.push('/login')
     }
@@ -54,6 +60,7 @@ class TeamMemberList extends Component {
     )
   }
 
+  // will only return renderTeamMemberListComponents() if user and project in state are not empty
   render() { 
     return (
       <Fragment>

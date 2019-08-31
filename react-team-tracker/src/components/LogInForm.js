@@ -17,7 +17,11 @@ class LogInForm extends Component {
     this.getCurrentUser()
   }
 
+  // updates user in state by GET request
   getCurrentUser = () => {
+    // token is retrieved from localStorage and used to get currently logged in user
+    // updates user in state based on the currently logged in user
+    // once a user is logged in, it will redirect to Home
     const token = localStorage.getItem('token')
     if (token) {
       const headers = {'Authorization': 'Bearer ' + token}
@@ -30,17 +34,23 @@ class LogInForm extends Component {
           })
         })
     }
+    // redirects to Log In page if there is no token in localStorage
     else {
       this.props.history.push('/login')
     }
   }
 
+  // updates state by getting name and assigning new value to name
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
     })
   }
 
+  // authenticates user via POST request using username and password
+  // updates token in localStorage after authentication is successfull
+  // once a user is logged in, it will redirect to Home
+  // returns an error if authentication fails
   handleSubmit = (e) => {
     e.preventDefault()
     const { username, password } = this.state
