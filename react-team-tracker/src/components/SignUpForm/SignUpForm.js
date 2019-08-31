@@ -9,12 +9,32 @@ import Title from 'antd/lib/typography/Title';
 
 class SignUpForm extends Component {
   state = {
+    'user': null,
     'first_name': '',
     'last_name': '',
     'username': '',
     'password': '',
     'team': '',
     'image_url': '',
+  }
+
+  componentDidMount = () => {
+    this.getCurrentUser()
+  }
+
+  getCurrentUser = () => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      const headers = {'Authorization': 'Bearer ' + token}
+      axios.get('http://localhost:8000/users/current/', {'headers': headers})
+        .then(res => {
+          this.setState({
+            user: res.data
+          }, () => {
+            this.props.history.push('/')
+          })
+        })
+    }
   }
 
   setToNull = () => {
