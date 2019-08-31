@@ -44,7 +44,7 @@ class ProjectOption extends Component {
       })
     ) : (null)
     return (
-      <Select name="project" onChange={this.handleChange} defaultValue={this.props.value} style={{ width: '70%' }}>
+      <Select name="project" onChange={this.handleChange} value={this.props.value} defaultValue={this.props.value} style={{ width: '70%' }}>
         <Option value="">-- Select Project --</Option>
         {projectList}
       </Select>

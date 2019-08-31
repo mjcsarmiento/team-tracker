@@ -8,14 +8,14 @@ const InputGroup = Input.Group;
 class TimeEntryForm extends Component {
   state = {
     user: this.props.user.id,
-    hours: 0,
+    hours: '',
     project: '',
     task_description: '',
   }
 
   setToNull = () => {
     this.setState({
-      hours: 0,
+      hours: '',
       project: '',
       task_description: ''
     })
@@ -37,21 +37,25 @@ class TimeEntryForm extends Component {
     e.preventDefault()
     axios.post('http://localhost:8000/time_entries/api/time_entries/', this.state)
       .then(res => {
-        this.setToNull()
         this.props.updateTimeEntryList(res.data)
+      })
+      .finally(() => {
+        this.setToNull()
       })
   }
 
   render() { 
-    const { project, task_description } = this.state
+    const { hours, project, task_description } = this.state
     return (
-      <Form>
+      <Form onSubmit={this.handleSubmit}>
         <InputGroup compact>
           <InputNumber
           onChange={this.handleHoursChange}
           min={0}
           placeholder="Number of Hours"
           style={{ width: '30%' }}
+          defaultValue={hours}
+          value={hours}
           required/>
           <ProjectOption 
             onChange={this.handleChange} 
@@ -68,7 +72,7 @@ class TimeEntryForm extends Component {
           value={task_description}
           required
         />
-        <Button type="submit" className="btn-submit" align="right">Submit</Button>
+        <Button htmlType="submit" className="btn-submit" align="right">Submit</Button>
       </Form>
     )
   }
