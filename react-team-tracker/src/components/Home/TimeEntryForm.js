@@ -60,8 +60,7 @@ class TimeEntryForm extends Component {
           <ProjectOption 
             onChange={this.handleChange} 
             value={project} 
-            teamId={this.props.user.team} 
-            required
+            teamId={this.props.user.team}
           />
         </InputGroup>
         <br/>
@@ -72,7 +71,14 @@ class TimeEntryForm extends Component {
           value={task_description}
           required
         />
-        <Button htmlType="submit" className="btn-submit" align="right">Submit</Button>
+        {
+          hours && project && task_description ? (
+            <Button htmlType="submit" className="btn-submit" align="right">Submit</Button>
+          ) : (
+            <Button htmlType="submit" className="btn-submit" align="right" disabled>Submit</Button>
+          )
+        }
+
       </Form>
     )
   }
