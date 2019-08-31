@@ -8,10 +8,18 @@ from apps.time_entries.serializers import TimeEntrySerializer
 
 
 class ProjectSerializer(serializers.ModelSerializer):
+    total_hours = serializers.SerializerMethodField()
     class Meta:
         model = Project
         fields = '__all__'
 
+    def get_total_hours(self, obj):
+        time_entries = obj.project_time_entries.values_list('id', flat=True)
+        total_hours = 0
+        if len(time_entries.values()):
+            total_hours = time_entries.aggregate(Sum('hours'))['hours__sum']
+        return total_hours
+        
 
 class TeamSerializer(serializers.ModelSerializer):
     # Included values for TeamSerializer
