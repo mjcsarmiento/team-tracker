@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+  django-team-tracker:
+    container_name: django_team_tracker
+    build: ./django-team-tracker
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./django-team-tracker:/django
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  react-team-tracker:
+    container_name: react_team_tracker
+    build: ./react-team-tracker
+    command: npm start
+    volumes:
+      - ./react-team-tracker:/react
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
