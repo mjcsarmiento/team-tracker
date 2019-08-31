@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import { Select } from 'antd';
+const { Option } = Select;
 
 class ProjectOption extends Component {
   state = {
@@ -20,9 +21,14 @@ class ProjectOption extends Component {
       })
   }
 
-  handleChange = (e) => {
-    if (e.target.value !== '') {
-      this.props.onChange(e)
+  handleChange = (value) => {
+    if (value !== '')  {
+      this.props.onChange({
+        'target': {
+          'name': 'project',
+          'value': value, 
+        }
+      })
     }
   }
 
@@ -31,17 +37,17 @@ class ProjectOption extends Component {
     const projectList = projects.length ? (
       projects.map(project => {
         return (
-          <option key={project.id} value={project.id}>
+          <Option key={project.id} value={project.id}>
             {project.name}
-          </option>
+          </Option>
         )
       })
     ) : (null)
     return (
-      <select name="project" onChange={this.handleChange} value={this.props.value}>
-        <option value=""> -- Select Project -- </option>
+      <Select name="project" onChange={this.handleChange} defaultValue={this.props.value} style={{ width: '70%' }}>
+        <Option value="">-- Select Project --</Option>
         {projectList}
-      </select>
+      </Select>
     )
   }
 }

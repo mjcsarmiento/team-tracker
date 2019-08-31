@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Icon } from 'antd';
 
 class TimeEntryListItem extends Component {
   state = {
@@ -33,13 +34,22 @@ class TimeEntryListItem extends Component {
   renderComponent = () => {
     const { time_in, hours, task_description } = this.props.entry
     const { user, project } = this.state
+    const dateTime = new Date(time_in)
+    const hoursLbl = hours > 1 ? ('hours') : ('hour')
     return (
-      <div>
-        <p>{time_in}</p>
-        <p>{hours}</p>
-        <p>{user.first_name} {user.last_name}</p>
-        <p>{project.name}</p>
-        <p>{task_description}</p>
+      <div className="entry-item">
+        <img src={user.image_url} align="left" alt="profile"/>
+        <p className="name">{user.first_name} {user.last_name}</p>
+        <p><Icon type="calendar" /> {dateTime.toLocaleDateString()} {dateTime.toLocaleTimeString()}</p>
+        <div className="hours-projects">
+          <div className="hours">
+            <Icon type="clock-circle" className="icon"/> {hours} {hoursLbl}
+          </div>
+          <div className="projects">
+            <Icon type="project" className="icon"/> {project.name}
+          </div>
+        </div>
+        {task_description}
       </div>
     );
   }

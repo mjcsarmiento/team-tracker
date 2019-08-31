@@ -26,7 +26,7 @@ class ProjectSummary extends Component {
         return (
           <tr key={project.id}>
             <td>{project.name}</td>
-            <td>{project.total_hours}</td>
+            <td align="center">{project.total_hours}</td>
           </tr>
         )
       })
