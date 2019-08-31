@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     # Installed Apps
     'rest_framework',
+    'django_filters',
 ]
 
 # Custom Settings
