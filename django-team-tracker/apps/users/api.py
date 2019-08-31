@@ -1,5 +1,6 @@
-from rest_framework import mixins, viewsets
+from rest_framework import mixins, viewsets, generics
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.response import Response
 
 from .models import CustomUser
 from .serializers import CustomUserSerializer
@@ -16,3 +17,14 @@ class UserViewSet(mixins.ListModelMixin,
     filterset_fields = ['team',]
     
     lookup_field = 'id'
+
+
+class CustomUserRegisterAPIView(generics.GenericAPIView):
+    serializer_class = CustomUserSerializer
+
+    def post(self, request, *args, **kwargs):
+        # For creating new CustomUser
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        return Response(CustomUserSerializer(user, context=self.get_serializer_context()).data)

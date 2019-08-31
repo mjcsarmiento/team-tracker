@@ -9,4 +9,5 @@ router.register(r'users', api.UserViewSet)
 app_name = 'users'
 urlpatterns = [
     path('api/', include(router.urls)),
+    path('register/', api.CustomUserRegisterAPIView.as_view(), name='api-user-register'),
 ]
