@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
-import TimeEntryList from './TimeEntryList';
+import TimeEntryList from './Home/TimeEntryList';
+import ProjectSummary from './Home/ProjectSummary';
 
 
 class Home extends Component {
@@ -40,6 +41,16 @@ class Home extends Component {
         })
       })
   }
+  
+  renderHomeComponents = () => {
+    return (
+      <div>
+        <TimeEntryList entries={this.state.entries}/>
+        <ProjectSummary teamId={this.state.user.team}/>
+        <button onClick={this.logOutUser}>Logout</button>
+      </div>
+    )
+  }
 
   logOutUser = () => {
     localStorage.removeItem('token')
@@ -48,12 +59,9 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
-        { this.state.entries ? (
-          <TimeEntryList entries={this.state.entries}/>
-        ) : (null) }
-        <button onClick={this.logOutUser}>Logout</button>
-      </div>
+      <Fragment>
+        { this.state.user ? (this.renderHomeComponents()) : (null) }
+      </Fragment>
     );
   }
 }
