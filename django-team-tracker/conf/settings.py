@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # Custom Apps
     'apps.team_projects',
+    'apps.users',
 ]
 
 MIDDLEWARE = [
