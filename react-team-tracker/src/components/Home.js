@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import TimeEntryList from './TimeEntryList';
 
 
 class Home extends Component {
   state = {
-    user: null
+    user: null,
+    entries: []
   }
 
   componentDidMount = () => {
@@ -16,17 +18,27 @@ class Home extends Component {
     const token = localStorage.getItem('token')
     if (token) {
       const headers = {'Authorization': 'Bearer ' + token}
-      console.log(headers)
       axios.get('http://localhost:8000/users/current/', {'headers': headers})
         .then(res => {
           this.setState({
             user: res.data
+          }, () => {
+            this.getTimeEntryList(this.state.user.team)
           })
         })
     }
     else {
       this.props.history.push('/login')
     }
+  }
+
+  getTimeEntryList = (teamId) => {
+    axios.get('http://localhost:8000/team_projects/api/teams/' + teamId)
+      .then(res => {
+        this.setState({
+          entries: res.data.recent_time_entries
+        })
+      })
   }
 
   logOutUser = () => {
@@ -37,6 +49,9 @@ class Home extends Component {
   render() {
     return (
       <div>
+        { this.state.entries ? (
+          <TimeEntryList entries={this.state.entries}/>
+        ) : (null) }
         <button onClick={this.logOutUser}>Logout</button>
       </div>
     );
