@@ -6,6 +6,7 @@ import { Form, Input, Button } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import './SignUpForm.css';
 import Title from 'antd/lib/typography/Title';
+import NavBarLink from '../Header/NavBarLink';
 
 class SignUpForm extends Component {
   state = {
@@ -157,6 +158,9 @@ class SignUpForm extends Component {
             ) : (
               <Button htmlType="submit" className="btn-submit" disabled>Submit</Button>
             )}
+            <div className="login-link">
+              <NavBarLink path="/login" label="Go back to login page"/>
+            </div>
           </Form>
         </center>
       </div>

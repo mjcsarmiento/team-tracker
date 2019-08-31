@@ -18,3 +18,15 @@
   color: #950740;
   border: 1px solid #950740;
 }
+
+.signup-container .login-link {
+  margin-top: 15px;
+}
+
+.signup-container .login-link a {
+  color: #950740;
+}
+
+.signup-container .login-link a:hover {
+  color: #000000;
+}
