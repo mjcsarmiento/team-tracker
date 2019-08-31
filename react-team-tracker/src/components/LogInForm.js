@@ -4,8 +4,31 @@ import { withRouter } from 'react-router-dom';
 
 class LogInForm extends Component {
   state = {
+    user: null,
     username: '',
     password: '',
+  }
+
+  componentDidMount = () => {
+    this.getCurrentUser()
+  }
+
+  getCurrentUser = () => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      const headers = {'Authorization': 'Bearer ' + token}
+      axios.get('http://localhost:8000/users/current/', {'headers': headers})
+        .then(res => {
+          this.setState({
+            user: res.data
+          }, () => {
+            this.props.history.push('/')
+          })
+        })
+    }
+    else {
+      this.props.history.push('/login')
+    }
   }
 
   handleChange = (e) => {
@@ -16,7 +39,8 @@ class LogInForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    axios.post('http://localhost:8000/api/token/', this.state)
+    const { username, password } = this.state
+    axios.post('http://localhost:8000/api/token/', {'username': username, 'password': password})
       .then(res => {
         localStorage.setItem('token', res.data.access)
         this.props.history.push('/')
