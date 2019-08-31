@@ -1,9 +1,11 @@
-from rest_framework import mixins, viewsets, generics
+from rest_framework import mixins, viewsets, generics, views
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 from .models import CustomUser
 from .serializers import CustomUserSerializer
+
 
 class UserViewSet(mixins.ListModelMixin,
                     mixins.RetrieveModelMixin,
@@ -28,3 +30,16 @@ class CustomUserRegisterAPIView(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         return Response(CustomUserSerializer(user, context=self.get_serializer_context()).data)
+
+
+class CurrentCustomUserAPIView(views.APIView):
+    # This will get the current logged in user
+    # Returns 403 FORBIDDEN if no user is currently logged in
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        user = self.request.user
+        
+        if not user.is_anonymous:
+            serializer = CustomUserSerializer(user)
+            return Response(serializer.data)
