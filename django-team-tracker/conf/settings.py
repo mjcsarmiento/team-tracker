@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'apps.team_projects',
     'apps.users',
     'apps.time_entries',
+
+    # Installed Apps
+    'rest_framework',
 ]
 
 # Custom Settings
