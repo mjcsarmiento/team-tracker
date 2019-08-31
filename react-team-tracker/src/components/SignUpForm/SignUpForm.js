@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import TeamOption from './TeamOption';
+import { Form, Input, Button } from 'antd';
+import TextArea from 'antd/lib/input/TextArea';
+import './SignUpForm.css';
+import Title from 'antd/lib/typography/Title';
 
 class SignUpForm extends Component {
   state = {
@@ -45,11 +49,13 @@ class SignUpForm extends Component {
       ) : (data)
     )
       .then(res => {
-        this.setToNull()
         this.props.history.push('/login')
       })
       .catch(error => {
         alert(error.response.data.username)
+      })
+      .finally(() => {
+        this.setToNull()
       })
   }
 
@@ -72,15 +78,68 @@ class SignUpForm extends Component {
   render() {
     const { first_name, last_name, username, password, team, image_url } = this.state
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" name="first_name" placeholder="First Name" value={first_name} onChange={this.handleChange} required/>
-        <input type="text" name="last_name" placeholder="Last Name" value={last_name} onChange={this.handleChange} required/>
-        <input type="text" name="username" placeholder="Username" value={username} onChange={this.handleChange} required/>
-        <input type="password" name="password" placeholder="Password" value={password} onChange={this.handleChange} required/>
-        <TeamOption onChange={this.handleChange} value={team}/>
-        <textarea name="image_url" placeholder="Image URL" onChange={this.handleChange} value={image_url}/>
-        <button type="submit">Submit</button>
-      </form>
+      <div className="signup-container">
+        <center>
+          <Title level={4}>Registration</Title>
+          <Form onSubmit={this.handleSubmit} className="signup-form">
+            <Form.Item>
+              <Input
+              name="first_name"
+              placeholder="First Name"
+              value={first_name}
+              onChange={this.handleChange}
+              required
+            />
+            </Form.Item>
+            <Form.Item>
+              <Input
+                name="last_name"
+                placeholder="Last Name"
+                value={last_name}
+                onChange={this.handleChange}
+                required
+              />
+            </Form.Item>
+            <Form.Item>
+              <Input
+                name="username"
+                placeholder="Username"
+                value={username}
+                onChange={this.handleChange}
+                required
+              />
+            </Form.Item>
+            <Form.Item>
+              <Input.Password
+                name="password"
+                placeholder="Password"
+                value={password}
+                onChange={this.handleChange}
+                required
+              />
+            </Form.Item>
+            <Form.Item>
+              <TeamOption
+                onChange={this.handleChange} 
+                value={team}
+              />
+            </Form.Item>
+            <Form.Item>
+              <TextArea
+                name="image_url"
+                placeholder="Image URL"
+                value={image_url}
+                onChange={this.handleChange}
+              />
+            </Form.Item>
+            { first_name && last_name && username && password && team ? (
+              <Button htmlType="submit" className="btn-submit">Submit</Button>
+            ) : (
+              <Button htmlType="submit" className="btn-submit" disabled>Submit</Button>
+            )}
+          </Form>
+        </center>
+      </div>
     )
   }
 }

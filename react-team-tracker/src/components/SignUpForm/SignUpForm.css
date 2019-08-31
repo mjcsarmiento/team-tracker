@@ -1,0 +1,20 @@
+.signup-container {
+  margin: 50px 0px;;
+}
+
+.signup-form {
+  width: 300px;
+  margin-top: 30px !important;
+}
+
+.signup-form .btn-submit {
+  background: #950740;
+  color: #ffffff;
+  border: 1px solid #950740;
+}
+
+.signup-form .btn-submit:hover {
+  background: #ffffff;
+  color: #950740;
+  border: 1px solid #950740;
+}
