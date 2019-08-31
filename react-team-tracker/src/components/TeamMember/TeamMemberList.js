@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import TeamMemberListItem from './TeamMemberListItem';
+import './TeamMember.css';
 
 class TeamMemberList extends Component {
   state = {
@@ -48,7 +49,9 @@ class TeamMemberList extends Component {
         )
       })
     ): (null)
-    return memberList
+    return (
+      <div className="profiles">{memberList}</div>
+    )
   }
 
   render() { 
