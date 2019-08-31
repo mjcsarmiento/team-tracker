@@ -37,6 +37,7 @@ class TeamSerializer(serializers.ModelSerializer):
             recent_time_entries = TimeEntry.objects.filter(
                 time_in__gte=first_day,
                 project__in=team_projects_list)
+            recent_time_entries = recent_time_entries.order_by('-time_in')
         
         # TimeEntrySerializer will return a sorted list from most recent to oldest according to time_in
         serializer = TimeEntrySerializer(recent_time_entries, many=True)
