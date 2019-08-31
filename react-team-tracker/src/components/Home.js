@@ -3,7 +3,7 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import TimeEntryList from './Home/TimeEntryList';
 import ProjectSummary from './Home/ProjectSummary';
-
+import TimeEntryForm from './Home/TimeEntryForm';
 
 class Home extends Component {
   state = {
@@ -41,10 +41,17 @@ class Home extends Component {
         })
       })
   }
-  
+
+  updateTimeEntryList = (newEntry) => {
+    this.setState({
+      entries: [newEntry, ...this.state.entries]
+    })
+  }
+
   renderHomeComponents = () => {
     return (
       <div>
+        <TimeEntryForm user={this.state.user} updateTimeEntryList={this.updateTimeEntryList}/>
         <TimeEntryList entries={this.state.entries}/>
         <ProjectSummary teamId={this.state.user.team}/>
         <button onClick={this.logOutUser}>Logout</button>
