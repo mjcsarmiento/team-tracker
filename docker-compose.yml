@@ -3,10 +3,12 @@ version: '3'
 services:
   db:
     image: postgres
+    ports:
+      - "5432:5432"
   django-team-tracker:
     container_name: django_team_tracker
     build: ./django-team-tracker
-    command: python manage.py runserver 0.0.0.0:8000
+    command: bash -c "sleep 10 && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./django-team-tracker:/django
     ports:
@@ -19,7 +21,11 @@ services:
     command: npm start
     volumes:
       - ./react-team-tracker:/react
+      - node-modules:/react/node_modules
     ports:
       - "3000:3000"
     depends_on:
       - db
+
+volumes:
+  node-modules:
