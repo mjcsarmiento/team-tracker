@@ -1,0 +1,14 @@
+.profiles {
+  text-align: center; 
+  margin-top: 30px;
+}
+
+.user-profile {
+  display: inline-block;
+  padding: 30px;
+}
+
+.user-profile img {
+  width: 200px;
+  margin-bottom: 15px;
+}

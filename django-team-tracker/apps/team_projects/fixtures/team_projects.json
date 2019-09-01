@@ -1,0 +1,93 @@
+[
+{
+  "model": "team_projects.team",
+  "pk": 1,
+  "fields": {
+    "name": "UI/UX and Front-end Development"
+  }
+},
+{
+  "model": "team_projects.team",
+  "pk": 2,
+  "fields": {
+    "name": "E-commerce"
+  }
+},
+{
+  "model": "team_projects.team",
+  "pk": 3,
+  "fields": {
+    "name": "Enterprise Resource Planning"
+  }
+},
+{
+  "model": "team_projects.team",
+  "pk": 4,
+  "fields": {
+    "name": "Networking and Operations"
+  }
+},
+{
+  "model": "team_projects.team",
+  "pk": 5,
+  "fields": {
+    "name": "System Administration"
+  }
+},
+{
+  "model": "team_projects.project",
+  "pk": 1,
+  "fields": {
+    "name": "Web App Design Templates",
+    "team": 1
+  }
+},
+{
+  "model": "team_projects.project",
+  "pk": 2,
+  "fields": {
+    "name": "Mobile App Design Templates",
+    "team": 1
+  }
+},
+{
+  "model": "team_projects.project",
+  "pk": 3,
+  "fields": {
+    "name": "Logo and Assets Creation",
+    "team": 1
+  }
+},
+{
+  "model": "team_projects.project",
+  "pk": 4,
+  "fields": {
+    "name": "Invoicing Application",
+    "team": 3
+  }
+},
+{
+  "model": "team_projects.project",
+  "pk": 5,
+  "fields": {
+    "name": "Inventory Management System",
+    "team": 3
+  }
+},
+{
+  "model": "team_projects.project",
+  "pk": 6,
+  "fields": {
+    "name": "Point of Sales",
+    "team": 2
+  }
+},
+{
+  "model": "team_projects.project",
+  "pk": 7,
+  "fields": {
+    "name": "GoCart Shopping App",
+    "team": 2
+  }
+}
+]

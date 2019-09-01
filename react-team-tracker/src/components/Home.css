@@ -1,0 +1,78 @@
+.home {
+  display: flex;
+}
+
+.home .home-left {
+  padding:30px;
+  flex: 6;
+}
+
+.home .home-right {
+  padding:30px;
+  flex: 3;
+}
+
+.home img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.home .user-name {
+  line-height: 40px !important;
+  margin-bottom:20px;
+}
+
+.home .btn-submit {
+  margin-top: 15px;
+  background: #950740;
+  color: #ffffff;
+  border: 1px solid #950740;
+}
+
+.home .btn-submit:hover {
+  background: #ffffff;
+  color: #950740;
+  border: 1px solid #950740;
+}
+
+.home .entry-form {
+  border-radius: 10px;
+}
+
+.home .entry {
+  margin: 20px 0;
+  border-radius: 10px;
+  background: #f7f7f7;
+}
+
+.home .entry-item p.name {
+  font-weight: bold;
+  margin: 0;
+}
+
+.home .entry-item .hours-projects {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.home .entry-item .hours-projects .icon {
+  margin-right: 5px;
+}
+
+.home .entry-item .hours-projects .hours {
+  flex: 1;
+}
+
+.home .entry-item .hours-projects .projects {
+  flex: 6;
+}
+
+.home table {
+  border: 1px solid #e0e0e0;
+  font-size: 15px;
+}
+
+.home table td, th {
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+}
